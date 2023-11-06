@@ -1,7 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Modal, Text, Button, StyleSheet, View, TextInput, ScrollView } from "react-native"
+import DatePicker from '@dietime/react-native-date-picker';
 
 const Formulario = ({modalVisible}) => {
+
+    const [paciente, setPaciente] = useState("");
+    const [propietario, setPropietario] = useState("");
+    const [email, setEmail] = useState("");
+    const [telefono, setTelefono] = useState("");
+    const [date, setDate] = useState(new Date());
+    const [sintomas, setSintomas] = useState("");
+
+    console.log(paciente)
   return (
     <Modal
         animationType='slide'
@@ -26,6 +36,8 @@ const Formulario = ({modalVisible}) => {
                         style={styles.input}
                         placeholder='Nombre Paciente'
                         placeholderTextColor={"#666"}
+                        value={paciente}
+                        onChangeText={setPaciente}
                     />
                 </View>
 
@@ -37,6 +49,8 @@ const Formulario = ({modalVisible}) => {
                         style={styles.input}
                         placeholder='Nombre Propietario'
                         placeholderTextColor={"#666"}
+                        value={propietario}
+                        onChangeText={setPropietario}
                     />
                 </View>
 
@@ -49,6 +63,8 @@ const Formulario = ({modalVisible}) => {
                         placeholder='Email Propietario'
                         placeholderTextColor={"#666"}
                         keyboardType='email-address'
+                        value={email}
+                        onChangeText={setEmail}
                     />
                 </View>
 
@@ -61,7 +77,24 @@ const Formulario = ({modalVisible}) => {
                         placeholder='Teléfono Propietario'
                         placeholderTextColor={"#666"}
                         keyboardType='number-pad'
+                        value={telefono}
+                        onChangeText={setTelefono}
+                        maxLength={10}
                     />
+                </View>
+
+                <View
+                    style={styles.campo}
+                >
+                    <Text style={styles.label}>Fecha Alta</Text>
+
+                    <View style={styles.fechaContenedor}>
+                        <DatePicker
+                           value={date}
+                           onChange={(value) => setDate(value)}
+                           format="yyyy-mm-dd"
+                        />
+                    </View>
                 </View>
 
                 <View
@@ -72,7 +105,11 @@ const Formulario = ({modalVisible}) => {
                         style={styles.input}
                         placeholder='Sintomas Paciente'
                         placeholderTextColor={"#666"}
-                        
+                        value={sintomas}
+                        onChangeText={setSintomas}
+                        multiline={true}
+                        numberOfLines={4}
+                        textAlignVertical='top'
                     />
                 </View>
 
@@ -115,6 +152,9 @@ const styles = StyleSheet.create({
         padding: 15,
         borderRadius: 10,
        
+    },
+    fechaContenedor: {
+        backgroundColor: "#FFF"
     }
 })
 

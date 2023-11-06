@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 import { StyleSheet, Text, View, Button, Pressable, Modal } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
 
 import Formulario from './components/Formulario';
 
@@ -11,6 +11,7 @@ export default function App() {
   const [ modalVisible, setModalVisible ] = useState(false);
 
   return (
+    <SafeAreaProvider>
     <SafeAreaView style={styles.container}>
 
       <Text style={styles.titulo}>Administrador de Citas {''}
@@ -30,6 +31,7 @@ export default function App() {
       />
       
     </SafeAreaView>
+    </SafeAreaProvider>
   );
 }
 
