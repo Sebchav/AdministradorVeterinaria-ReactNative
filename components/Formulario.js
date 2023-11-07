@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import { Modal, Text, Button, StyleSheet, View, TextInput, ScrollView } from "react-native"
-import DatePicker from '@dietime/react-native-date-picker';
+import { Modal, Text, Button, StyleSheet, View, TextInput, ScrollView, Pressable } from "react-native"
+import DateTimePicker from 'react-native-ui-datepicker';
 
-const Formulario = ({modalVisible}) => {
+const Formulario = ({modalVisible, setModalVisible}) => {
 
     const [paciente, setPaciente] = useState("");
     const [propietario, setPropietario] = useState("");
@@ -11,7 +11,10 @@ const Formulario = ({modalVisible}) => {
     const [date, setDate] = useState(new Date());
     const [sintomas, setSintomas] = useState("");
 
-    console.log(paciente)
+    const handleCita = ()=>{
+        console.log("Presionaste agregar paciente")
+    }
+
   return (
     <Modal
         animationType='slide'
@@ -27,6 +30,13 @@ const Formulario = ({modalVisible}) => {
                         style={styles.tituloBold}
                     >Cita</Text>
                 </Text>
+
+               <Pressable 
+                style={styles.btnCancelar}
+                onPress={()=> setModalVisible(!modalVisible)}
+                >
+                    <Text style={styles.btnCancelarTexto}>X Cancelar</Text>
+               </Pressable> 
 
                 <View
                     style={styles.campo}
@@ -89,10 +99,9 @@ const Formulario = ({modalVisible}) => {
                     <Text style={styles.label}>Fecha Alta</Text>
 
                     <View style={styles.fechaContenedor}>
-                        <DatePicker
-                           value={date}
-                           onChange={(value) => setDate(value)}
-                           format="yyyy-mm-dd"
+                        <DateTimePicker 
+                            value={date}
+                            
                         />
                     </View>
                 </View>
@@ -112,6 +121,13 @@ const Formulario = ({modalVisible}) => {
                         textAlignVertical='top'
                     />
                 </View>
+
+                <Pressable 
+                    style={styles.btnNuevaCita}
+                    onPress={handleCita}
+                >
+                    <Text style={styles.btnNuevaCitaTexto}>Agregar Paciente</Text>
+               </Pressable> 
 
             </ScrollView>
         </View>
@@ -135,9 +151,23 @@ const styles = StyleSheet.create({
     tituloBold: {
         fontWeight: "900"
     },
+    btnCancelar:{
+        marginVertical: 30,
+        backgroundColor: "#5827A4",
+        marginHorizontal: 30,
+        padding: 15,
+        borderRadius: 10,    
+    },
+    btnCancelarTexto: {
+        color: "#FFF",
+        textAlign: "center",
+        fontWeight: "900",
+        fontSize: 16,
+        textTransform: 'uppercase'
+    },
     campo:{
         marginTop: 10,
-        marginHorizontal: 30,
+        marginHorizontal: 30
      
     },
     label: {
@@ -155,6 +185,20 @@ const styles = StyleSheet.create({
     },
     fechaContenedor: {
         backgroundColor: "#FFF"
+    },
+    btnNuevaCita: {
+        marginVertical: 50,
+        backgroundColor: "#F59E0B",
+        paddingVertical: 15,
+        marginHorizontal: 30,
+        borderRadius: 10
+    },
+    btnNuevaCitaTexto: {
+        textAlign: "center",
+        color: "#5827A4",
+        textTransform: "uppercase",
+        fontWeight: "900",
+        fontSize: 16
     }
 })
 

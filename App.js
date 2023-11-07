@@ -19,7 +19,7 @@ export default function App() {
       </Text>
 
       <Pressable
-        onPress={ ()=> setModalVisible(true) }
+        onPress={ ()=> setModalVisible(!modalVisible) }
         style={styles.btnNuevaCita}
       >
        <Text style={styles.btnTextoNuevaCita}>Nueva Cita</Text>
@@ -27,7 +27,7 @@ export default function App() {
 
       <Formulario 
         modalVisible={modalVisible}
-      
+        setModalVisible={setModalVisible}
       />
       
     </SafeAreaView>
